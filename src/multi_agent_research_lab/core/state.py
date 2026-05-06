@@ -1,9 +1,4 @@
-"""Shared state for the multi-agent workflow.
-
-Students should extend this file when adding new agents, outputs, or evaluation metrics.
-"""
-
-from typing import Any
+from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -15,20 +10,20 @@ class ResearchState(BaseModel):
 
     request: ResearchQuery
     iteration: int = 0
-    route_history: list[str] = Field(default_factory=list)
+    route_history: List[str] = Field(default_factory=list)
 
-    sources: list[SourceDocument] = Field(default_factory=list)
-    research_notes: str | None = None
-    analysis_notes: str | None = None
-    final_answer: str | None = None
+    sources: List[SourceDocument] = Field(default_factory=list)
+    research_notes: Optional[str] = None
+    analysis_notes: Optional[str] = None
+    final_answer: Optional[str] = None
 
-    agent_results: list[AgentResult] = Field(default_factory=list)
-    trace: list[dict[str, Any]] = Field(default_factory=list)
-    errors: list[str] = Field(default_factory=list)
+    agent_results: List[AgentResult] = Field(default_factory=list)
+    trace: List[Dict[str, Any]] = Field(default_factory=list)
+    errors: List[str] = Field(default_factory=list)
 
     def record_route(self, route: str) -> None:
         self.route_history.append(route)
         self.iteration += 1
 
-    def add_trace_event(self, name: str, payload: dict[str, Any]) -> None:
+    def add_trace_event(self, name: str, payload: Dict[str, Any]) -> None:
         self.trace.append({"name": name, "payload": payload})

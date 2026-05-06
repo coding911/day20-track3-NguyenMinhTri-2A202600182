@@ -1,3 +1,36 @@
+# Hướng dẫn chạy bài lab này
+
+### 1. Kích hoạt môi trường ảo
+```bash
+# Windows
+.\venv\Scripts\activate
+```
+
+### 2. Cài đặt thư viện
+```bash
+python -m pip install -e .[llm,dev]
+```
+
+### 3. Cấu hình biến môi trường
+Mở file `.env` và đảm bảo các thông số sau đã được điền chính xác:
+- `OPENAI_API_KEY`: Token của bạn.
+- `BASE_URL`: URL của LLM provider (ví dụ: Azure Inference).
+- `OPENAI_MODEL`: `gpt-4o-mini`.
+
+### 4. Chạy hệ thống
+
+**Chạy Single-Agent Baseline:**
+```bash
+$env:PYTHONPATH="src"; python -m multi_agent_research_lab.cli baseline --query "Research GraphRAG state-of-the-art"
+```
+
+**Chạy Multi-Agent Workflow:**
+```bash
+$env:PYTHONPATH="src"; python -m multi_agent_research_lab.cli multi-agent --query "Research GraphRAG state-of-the-art"
+```
+
+---
+
 # Lab 20: Multi-Agent Research System Starter
 
 Starter repo cho bài lab **Multi-Agent Systems**: xây dựng hệ thống nghiên cứu gồm **Supervisor + Researcher + Analyst + Writer** và benchmark với single-agent baseline.
